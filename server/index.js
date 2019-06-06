@@ -24,7 +24,9 @@ app.use(session({
     }
 }))
 
+app.get('/auth/logout', authCtrl.logout)
 app.post('/auth/register', authCtrl.register)
+app.post('/auth/login', authCtrl.login)
 
 app.listen(SERVER_PORT, ()=>{
     console.log(`Listening on port ${SERVER_PORT}`)
