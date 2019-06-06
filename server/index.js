@@ -7,7 +7,7 @@ const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 // controllers + middleware
 const authCtrl = require('./controllers/authController');
-const treasCtrl = require('./controllers/treasureController');
+const treasureCtrl = require('./controllers/treasureController');
 const auth = require('./middleware/authMiddleware');
 
 // communication
@@ -33,8 +33,9 @@ app.get('/auth/logout', authCtrl.logout)
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 
-app.get('/api/treasure/dragon', treasCtrl.get_treas)
-app.get('/api/treasure/user', auth.usersOnly, treasCtrl.getUserTreasure)
+app.get('/api/treasure/dragon', treasureCtrl.get_treas)
+app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure)
+app.post('/api/treasure/user',auth.usersOnly, treasureCtrl.addUserTreasure)
 
 // listen
 app.listen(SERVER_PORT, ()=>{
