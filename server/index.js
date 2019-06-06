@@ -5,8 +5,11 @@ const massive = require('massive');
 require('dotenv').config();
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
+// controllers
 const authCtrl = require('./controllers/authController');
+const treasCtrl = require('./controllers/treasureController');
 
+// communication
 app.use(express.json());
 massive(CONNECTION_STRING)
     .then(db =>{
@@ -24,10 +27,14 @@ app.use(session({
     }
 }))
 
+// express points
 app.get('/auth/logout', authCtrl.logout)
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 
+app.get('/api/treasure/dragon', treasCtrl.get_treas)
+
+// listen
 app.listen(SERVER_PORT, ()=>{
     console.log(`Listening on port ${SERVER_PORT}`)
 })
