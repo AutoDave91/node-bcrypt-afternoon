@@ -5,9 +5,10 @@ const massive = require('massive');
 require('dotenv').config();
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
-// controllers
+// controllers + middleware
 const authCtrl = require('./controllers/authController');
 const treasCtrl = require('./controllers/treasureController');
+const auth = require('./middleware/authMiddleware');
 
 // communication
 app.use(express.json());
@@ -33,6 +34,7 @@ app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 
 app.get('/api/treasure/dragon', treasCtrl.get_treas)
+app.get('/api/treasure/user', auth.usersOnly, treasCtrl.getUserTreasure)
 
 // listen
 app.listen(SERVER_PORT, ()=>{
