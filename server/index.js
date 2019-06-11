@@ -36,6 +36,7 @@ app.post('/auth/login', authCtrl.login)
 app.get('/api/treasure/dragon', treasureCtrl.get_treas)
 app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure)
 app.post('/api/treasure/user',auth.usersOnly, treasureCtrl.addUserTreasure)
+app.get('/api/treasure/all', auth.adminsOnly, treasureCtrl.getAllTreasure)
 
 // listen
 app.listen(SERVER_PORT, ()=>{

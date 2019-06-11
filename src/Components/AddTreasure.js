@@ -17,7 +17,7 @@ export default class AddTreasure extends Component {
     const {treasureURL} = this.state
     axios.post('/api/treasure/user', {treasureURL: treasureURL})
       .then(res=>{
-        this.props.addTreasure(res.data);
+        this.props.addMyTreasure(res.data);
         this.setState({treasureURL:''})})
       .catch(err=>{
         alert(err.response.request.response)
